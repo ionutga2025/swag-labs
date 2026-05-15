@@ -26,8 +26,6 @@ test.describe("Login", () => {
   });
 
   test.describe("performance glitch user", () => {
-    test.use({ checkConsoleErrors: false });
-
     test("can authenticate", async ({ page, loginPage }) => {
       await loginPage.login(
         users.performance.username,

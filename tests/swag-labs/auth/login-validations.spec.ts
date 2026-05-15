@@ -40,8 +40,6 @@ test.describe("Login validations", () => {
 });
 
 test.describe("Unauthenticated user", () => {
-  test.use({ checkConsoleErrors: false });
-
   test("cannot access inventory directly", async ({ page, loginPage }) => {
     await page.goto("/inventory.html");
 

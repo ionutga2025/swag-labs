@@ -8,22 +8,27 @@ type Fixtures = {
   inventoryPage: InventoryPage;
 };
 
-type Options = {
-  checkConsoleErrors: boolean;
-};
+const ignoredErrors = [
+  "Failed to load resource: the server responded with a status of 401",
+  "Failed to load resource: the server responded with a status of 404 ()",
+];
 
-export const test = base.extend<Fixtures & Options>({
+export const test = base.extend<Fixtures>({
   ...pagesFixture,
 
-  checkConsoleErrors: [true, { option: true }],
-
-  page: async ({ page, checkConsoleErrors }, use) => {
+  page: async ({ page }, use) => {
     const errors: string[] = [];
 
     page.on("console", (msg) => {
-      if (msg.type() === "error") {
-        errors.push(`Console error: ${msg.text()}`);
-      }
+      if (msg.type() !== "error") return;
+
+      const text = msg.text();
+
+      const shouldIgnore = ignoredErrors.some((error) => text.includes(error));
+
+      if (shouldIgnore) return;
+
+      errors.push(`Console error: ${text}`);
     });
 
     page.on("pageerror", (error) => {
@@ -32,9 +37,7 @@ export const test = base.extend<Fixtures & Options>({
 
     await use(page);
 
-    if (checkConsoleErrors) {
-      expect(errors, `Browser errors:\n${errors.join("\n")}`).toEqual([]);
-    }
+    expect(errors, `Browser errors:\n${errors.join("\n")}`).toEqual([]);
   },
 });
 
