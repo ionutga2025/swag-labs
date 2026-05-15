@@ -18,6 +18,7 @@
   "homepage": "https://github.com/ionutga2025/swag-labs#readme",
   "devDependencies": {
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.7.0"
+    "@types/node": "^25.7.0",
+    "dotenv": "^17.4.2"
   }
 }
