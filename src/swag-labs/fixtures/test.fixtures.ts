@@ -2,10 +2,12 @@ import { test as base, expect } from "@playwright/test";
 import { pagesFixture } from "./pages.fixtures";
 import type { LoginPage } from "../../../src/swag-labs/pages/login.page";
 import type { InventoryPage } from "../../../src/swag-labs/pages/inventory.page";
+import type { CartPage } from "../../../src/swag-labs/pages/cart.page";
 
 type Fixtures = {
   loginPage: LoginPage;
   inventoryPage: InventoryPage;
+  cartPage: CartPage;
 };
 
 const ignoredErrors = [
