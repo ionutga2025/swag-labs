@@ -31,7 +31,7 @@ jobs:
           BOOKER_USERNAME: ${{ secrets.BOOKER_USERNAME }}
           BOOKER_PASSWORD: ${{ secrets.BOOKER_PASSWORD }}
 
-      - name: Upload API Playwright HTML report
+      - name: Upload API report
         uses: actions/upload-artifact@v4
         if: always()
         with:

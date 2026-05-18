@@ -11,7 +11,7 @@ env:
 
 jobs:
   test:
-    name: Swag Labs E2E
+    name: Swag Labs UI Tests
     runs-on: ubuntu-latest
 
     container:
@@ -24,9 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Playwright tests
-        id: playwright
-        run: npx playwright test
+      - name: Run UI tests
+        run: npm run test:ui
         env:
           STANDARD_USER: ${{ secrets.STANDARD_USER }}
           LOCKED_USER: ${{ secrets.LOCKED_USER }}
@@ -36,10 +35,10 @@ jobs:
           VISUAL_USER: ${{ secrets.VISUAL_USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
 
-      - name: Upload Playwright HTML report
+      - name: Upload UI report
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
+          name: swag-labs-ui-report
           path: playwright-report/
           retention-days: 7
