@@ -4,7 +4,6 @@ import "dotenv/config";
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
-  workers: 1,
   reporter: [
     ["github"],
     ["html", { outputFolder: "playwright-report", open: "never" }],
@@ -18,6 +17,7 @@ export default defineConfig({
     {
       name: "swag-labs",
       testDir: "./tests/swag-labs",
+      workers: 1,
       use: {
         ...devices["Desktop Chrome"],
         headless: process.env.CI ? true : false,
@@ -30,15 +30,13 @@ export default defineConfig({
         baseURL: "https://www.saucedemo.com",
       },
     },
-
-    /*    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
-
     {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    }, */
+      name: "restful-booker",
+      testMatch: /.*restful-booker.*\.spec\.ts/,
+      workers: process.env.CI ? 4 : undefined,
+      use: {
+        baseURL: process.env.API_BASE_URL,
+      },
+    },
   ],
 });

@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "commonjs",
-    "types": ["node", "playwright"],
+    "module": "Node16",
+    "moduleResolution": "node16",
+    "types": ["node", "@playwright/test"],
     "strict": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["tests", "src/swag-labs/pages", "playwright.config.ts"]
+  "include": ["tests", "src", "playwright.config.ts"]
 }
